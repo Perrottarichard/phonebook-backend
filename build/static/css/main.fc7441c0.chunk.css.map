@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA,OACI,SACJ,CACA,SACI,WACJ","file":"main.fc7441c0.chunk.css","sourcesContent":[".error {\n    color: red;\n}\n.success {\n    color: green;\n}"]}
