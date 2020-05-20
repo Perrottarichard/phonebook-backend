@@ -89,6 +89,13 @@ app.delete('/api/persons/:id', (req, res) => {
     // res.status(204).end();
 })
 
+app.put('/api/person/:id', (req, res) => {
+    Person.findByIdAndUpdate({ _id: req.params.id }, { name: req.body.name, number: req.body.number }, (err) => {
+        if (err) console.log(err)
+    }).then(update => {
+        res.send(update)
+    })
+})
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
