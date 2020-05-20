@@ -100,7 +100,7 @@ app.delete('/api/persons/:id', (req, res) => {
 })
 
 app.put('/api/persons/:id', (req, res) => {
-    Person.findByIdAndUpdate({ _id: req.params.id }, { name: req.body.name, number: req.body.number }, (err) => {
+    Person.findByIdAndUpdate({ _id: req.params.id }, { _id, name: req.body.name, number: req.body.number }, (err) => {
         if (err) console.log(err)
     }).then(update => {
         res.send(update)
