@@ -1,11 +1,11 @@
 require('dotenv').config()
-const express = require('express');
-const morgan = require('morgan');
+const express = require('express')
+const morgan = require('morgan')
 const Person = require('./models/person')
 
-const app = express();
+const app = express()
 
-app.use(express.json());
+app.use(express.json())
 app.use(express.static('build'))
 
 morgan.token('obj', function getObj(req) {
@@ -13,10 +13,11 @@ morgan.token('obj', function getObj(req) {
         name: req.body.name,
         number: req.body.number
     }
-    return JSON.stringify(pObj);
+    return JSON.stringify(pObj)
 })
-app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :obj`))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :obj'))
 
+// eslint-disable-next-line no-unused-vars
 let persons = app.get('/api/persons', (req, res) => {
     Person.find({}).then(result => {
         res.json(result)
@@ -28,7 +29,6 @@ app.get('/api/persons', (req, res) => {
         res.json(result)
     })
 })
-
 
 app.get('/api/persons/:id', (req, res, next) => {
     Person.findById(req.params.id)
@@ -49,13 +49,8 @@ app.get('/info', (req, res) => {
     })
 })
 
-// const generateId = () => {
-//     const maxId = persons.length > 0 ? Math.max(...persons.map(p => p.id)) : 0
-//     return maxId + 1
-// }
-
 app.post('/api/persons', (req, res, next) => {
-    const body = req.body;
+    const body = req.body
     const contact = new Person({
         name: body.name,
         number: body.number
@@ -71,7 +66,7 @@ app.post('/api/persons', (req, res, next) => {
 
 app.delete('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndRemove(req.params.id)
-        .then(result => {
+        .then(res => {
             res.status(204).end()
         })
         .catch(error => next(error))
@@ -95,14 +90,12 @@ const errorHandler = (error, request, response, next) => {
     } else if (error.name === 'ValidationError') {
         return response.status(400).json({ error: error.message })
     }
-
-
     next(error)
 }
 
 app.use(errorHandler)
 
-
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
