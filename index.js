@@ -82,7 +82,7 @@ app.put('/api/persons/:id', (req, res, next) => {
     Person.findByIdAndUpdate(req.params.id, { $set: updatedPerson }, { runValidators: true, context: 'query' })
         .then(updatedPerson => {
             console.log(updatedPerson)
-            res.send(updatedPerson)
+            res.json(updatedPerson)
         })
         .catch(error => next(error))
 })
