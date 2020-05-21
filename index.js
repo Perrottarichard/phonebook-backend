@@ -54,18 +54,8 @@ app.get('/info', (req, res) => {
 //     return maxId + 1
 // }
 
-app.post('/api/persons', (req, res) => {
+app.post('/api/persons', (req, res, next) => {
     const body = req.body;
-    // if (persons.filter(p => p.name === body.name).length > 0) {
-    //     return res.status(400).json({
-    //         error: 'name must be unique'
-    //     })
-    // }
-    // if (persons.filter(p => p.number === body.number).length > 0) {
-    //     return res.status(400).json({
-    //         error: 'number must be unique'
-    //     })
-    // }
     const contact = new Person({
         name: body.name,
         number: body.number
